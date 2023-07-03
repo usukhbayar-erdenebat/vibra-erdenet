@@ -177,12 +177,9 @@ func (h *handler) up(b []byte) error {
 	}
 	fmt.Printf("Uplink received from %t with payload: %s\n", up.ConfirmedUplink, hex.EncodeToString(up.Data))
 
-	fmt.Println("HEX :: ", hex.EncodeToString(up.Data))
-
 	cmd := exec.Command("node", "/root/vibra-erdenet/wise_engine.js", hex.EncodeToString(up.Data))
 
 	output, _ := cmd.Output()
-	fmt.Println("output : ", output)
 	var vibra Vibra
 	var store VibraStore
 	if err := json.Unmarshal(output, &vibra); err != nil {
