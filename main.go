@@ -179,7 +179,7 @@ func (h *handler) up(b []byte) error {
 
 	fmt.Println("HEX :: ", hex.EncodeToString(up.Data))
 
-	cmd := exec.Command("node", "wise_engine.js", hex.EncodeToString(up.Data))
+	cmd := exec.Command("node", "/root/vibra-erdenet/wise_engine.js", hex.EncodeToString(up.Data))
 
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
