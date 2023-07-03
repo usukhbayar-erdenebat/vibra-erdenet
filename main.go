@@ -178,7 +178,8 @@ func (h *handler) up(b []byte) error {
 	fmt.Printf("Uplink received from %t with payload: %s\n", up.ConfirmedUplink, hex.EncodeToString(up.Data))
 
 	fmt.Println("HEX :: ", hex.EncodeToString(up.Data))
-	cmd := exec.Command("node", "./wise_engine.js", hex.EncodeToString(up.Data))
+
+	cmd := exec.Command("node", "../wise_engine.js", hex.EncodeToString(up.Data))
 
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
