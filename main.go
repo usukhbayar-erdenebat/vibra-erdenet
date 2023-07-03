@@ -181,7 +181,7 @@ func (h *handler) up(b []byte) error {
 	cmd := exec.Command("node", "wise_engine.js", hex.EncodeToString(up.Data))
 
 	output, _ := cmd.Output()
-
+	fmt.Println("output : ", output)
 	var vibra Vibra
 	var store VibraStore
 	if err := json.Unmarshal(output, &vibra); err != nil {
