@@ -180,6 +180,20 @@ func (h *handler) up(b []byte) error {
 	fmt.Println("HEX :: ", hex.EncodeToString(up.Data))
 	cmd := exec.Command("node", "wise_engine.js", hex.EncodeToString(up.Data))
 
+	var stdout, stderr bytes.Buffer
+	cmd.Stdout = &stdout
+	cmd.Stderr = &stderr
+
+	err := cmd.Run()
+	if err != nil {
+		log.Printf("Error executing Node.js script: %s", err)
+		log.Printf("Standard error: %s", stderr.String())
+		return err
+	}
+
+	otpu := stdout.String()
+	log.Printf("Output: %s", otpu)
+
 	output, _ := cmd.Output()
 	fmt.Println("output : ", output)
 	var vibra Vibra
