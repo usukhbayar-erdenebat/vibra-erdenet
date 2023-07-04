@@ -295,18 +295,26 @@ func getVibraData(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	ConnectDatabase()
+
+	// Create a CORS middleware handler
 	c := cors.Default()
 
-	// Create a new HTTP handler
-	corsHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Your handler logic here
-		w.Write([]byte("Hello, CORS enabled!"))
+	// Create an HTTP handler for the root path
+	rootHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("Welcome to the API!"))
 	})
 
-	// Wrap the handler with CORS middleware
-	corsHandlerMiddleWare := c.Handler(corsHandler)
+	// Create an HTTP handler for the "/get-vibra" path
+	getVibraHandler := http.HandlerFunc(getVibraData)
 
-	http.Handle("/", &handler{json: true})
-	http.HandleFunc("/get-vibra", getVibraData)
-	log.Fatal(http.ListenAndServe(":8090", corsHandlerMiddleWare))
+	// Use the CORS middleware for the handlers
+	rootHandlerMiddleware := c.Handler(rootHandler)
+	getVibraHandlerMiddleware := c.Handler(getVibraHandler)
+
+	// Register the handlers
+	http.Handle("/", rootHandlerMiddleware)
+	http.Handle("/get-vibra", getVibraHandlerMiddleware)
+
+	// Start the server
+	log.Fatal(http.ListenAndServe(":8090", nil))
 }
