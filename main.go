@@ -17,6 +17,7 @@ import (
 	"github.com/golang/protobuf/proto"
 
 	"github.com/brocaar/chirpstack-api/go/v3/as/integration"
+	"github.com/rs/cors"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -294,7 +295,18 @@ func getVibraData(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	ConnectDatabase()
+	c := cors.Default()
+
+	// Create a new HTTP handler
+	corsHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// Your handler logic here
+		w.Write([]byte("Hello, CORS enabled!"))
+	})
+
+	// Wrap the handler with CORS middleware
+	corsHandlerMiddleWare := c.Handler(corsHandler)
+
 	http.Handle("/", &handler{json: true})
 	http.HandleFunc("/get-vibra", getVibraData)
-	log.Fatal(http.ListenAndServe(":8090", nil))
+	log.Fatal(http.ListenAndServe(":8090", corsHandlerMiddleWare))
 }

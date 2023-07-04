@@ -5,6 +5,7 @@ go 1.20
 require (
 	github.com/brocaar/chirpstack-api/go/v3 v3.12.5
 	github.com/golang/protobuf v1.5.3
+	github.com/rs/cors v1.9.0
 	gorm.io/driver/postgres v1.5.2
 	gorm.io/gorm v1.25.2
 )
