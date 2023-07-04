@@ -1,0 +1,349 @@
+<html lang="en"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>
+    <meta charset="UTF-8">
+    
+  
+      <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
+  
+      <meta name="apple-mobile-web-app-title" content="CodePen">
+  
+      <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+  
+      <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111">
+  
+  
+  
+    
+    <title>CodePen - A Pen by Renato Atilio</title>
+      <link rel="canonical" href="https://codepen.io/renatoat/pen/QWMKmO">
+    
+    
+    
+    
+  <style>
+  /* this is just an example - don't use !important */
+  
+  .item-header {
+    font-size: 12px !important;
+    font-weight: bold;
+  }
+  
+  .item-footer {
+    font-size: 12px !important;
+    font-weight: bold;
+    
+    /* the workaround below "fixes" the scrolling */
+    margin-bottom: 28px !important;
+  }
+  
+  .col-right {
+    text-align: right;
+    padding: 3px 5px 3px 5px !important;
+  }
+  
+  .col-sep {
+    border-left: 1px solid lightgray;
+  }
+  
+  .col-left {
+    padding: 3px 5px 3px 5px !important;
+  }
+  
+  .min-75 { min-width: 75px; }
+  .min-50 { min-width: 50px; }
+  .min-180 { min-width: 180px; }
+  .min-705 { min-width: 705px; }
+  
+  .row-item {
+    padding: 0px !important;
+    margin-left: 0 !important;
+    font-size: 12px !important;
+  }
+  </style>
+  
+    <script>
+    window.console = window.console || function(t) {};
+  </script>
+  
+    
+    
+  </head>
+  
+  <body translate="no" data-new-gr-c-s-check-loaded="14.1114.0" data-gr-ext-installed="" class="grade-a platform-browser platform-win32 platform-ready">
+    <link href="https://code.ionicframework.com/1.0.0-beta.8/css/ionic.css" rel="stylesheet">
+  <script src="https://code.ionicframework.com/1.0.0-beta.8/js/ionic.js"></script>
+  <script src="https://code.ionicframework.com/1.0.0-beta.8/js/angular/angular.js"></script>
+  <script src="https://code.ionicframework.com/1.0.0-beta.8/js/angular/angular-animate.js"></script>
+  <script src="https://code.ionicframework.com/1.0.0-beta.8/js/angular-ui/angular-ui-router.js"></script>
+  <script src="https://code.ionicframework.com/1.0.0-beta.8/js/angular/angular-sanitize.js"></script>
+  <script src="https://code.ionicframework.com/1.0.0-beta.8/js/angular/angular-resource.js"></script>
+  <script src="https://code.ionicframework.com/1.0.0-beta.8/js/ionic-angular.js"></script>
+  
+  <ion-side-menus ng-app="app" class=" view">
+    <ion-side-menu-content scroll="true" drag-content="false" ng-controller="AppCtrl" class="menu-content pane disable-user-behavior">
+      <ion-header-bar class="bar bar-header bar-positive disable-user-behavior">
+        <a class="button button-icon icon ion-navicon" ng-click="toggleLeft()"></a>
+        <a class="button button-icon icon ion-refresh" ng-click="toggleLeft()"></a>
+        <a class="button button-icon pull-right icon ion-search" ng-click="toggleLeft()"></a>
+  
+        <h1 class="title" style="left: 151px; right: 151px;">
+          Something here
+        </h1>
+      </ion-header-bar>
+  
+      <ion-content has-header="true" scroll="false" class="scroll-content ionic-scroll scroll-content-false  has-header">
+        <ion-scroll direction="x" style="width: 100%" scrollbar-x="false" delegate-handle="head" zooming="true" on-scroll="scrollMirror('head', 'list')" class="scroll-view ionic-scroll"><div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+          <div class="item item-header item-positive row row-item min-705">
+            <div class="col col-left col-20 min-180" ng-click="sort('descricao')">Estabelecimento</div>
+            <div class="col col-right min-75" ng-click="sort('valorLiquido')">Líquido (R$)</div>
+            <div class="col col-right min-75" ng-click="sort('valorBruto')">Bruto (R$)</div>
+            <div class="col col-right min-75" ng-click="sort('valorDesconto')">Desc. (R$)</div>
+            <div class="col col-right min-50" ng-click="sort('vendas')">Tickets</div>
+            <div class="col col-right min-50" ng-click="sort('ticketMedio')">T.M.</div>
+            <div class="col col-right min-50" ng-click="sort('quantidade')">Peças</div>
+            <div class="col col-right min-50" ng-click="sort('quantidadeMedia')">P.A.</div>
+            <div class="col col-right min-50" ng-click="sort('precoMedio')">P.M.V.</div>
+            <div class="col col-right min-50" ng-click="sort('markup')">Mkp(%)</div>
+          </div>
+        </div></ion-scroll>
+        <ion-scroll direction="xy" style="height: 100%" zooming="true" on-scroll="scrollMirror('list', 'head')" delegate-handle="list" class="scroll-view ionic-scroll"><div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+          <!-- ngRepeat: row in data | orderBy:predicate:desc --><div class="item row row-item min-705" ng-repeat="row in data | orderBy:predicate:desc">
+            <div class="col col-left col-20 min-180 ng-binding">TEST1</div>
+            <div class="col col-right col-sep min-75 ng-binding">22,003.06</div>
+            <div class="col col-right col-sep min-75 ng-binding">22,807.63</div>
+            <div class="col col-right col-sep min-75 ng-binding">804.57</div>
+            <div class="col col-right col-sep min-50 ng-binding">209</div>
+            <div class="col col-right col-sep min-50 ng-binding">105.28</div>
+            <div class="col col-right col-sep min-50 ng-binding">567</div>
+            <div class="col col-right col-sep min-50 ng-binding">2.71</div>
+            <div class="col col-right col-sep min-50 ng-binding">38.81</div>
+            <div class="col col-right col-sep min-50 ng-binding">98.15</div>
+          </div><!-- end ngRepeat: row in data | orderBy:predicate:desc --><div class="item row row-item min-705" ng-repeat="row in data | orderBy:predicate:desc">
+            <div class="col col-left col-20 min-180 ng-binding">TEST10</div>
+            <div class="col col-right col-sep min-75 ng-binding">2,880.78</div>
+            <div class="col col-right col-sep min-75 ng-binding">2,944.22</div>
+            <div class="col col-right col-sep min-75 ng-binding">63.44</div>
+            <div class="col col-right col-sep min-50 ng-binding">20</div>
+            <div class="col col-right col-sep min-50 ng-binding">144.04</div>
+            <div class="col col-right col-sep min-50 ng-binding">66</div>
+            <div class="col col-right col-sep min-50 ng-binding">3.30</div>
+            <div class="col col-right col-sep min-50 ng-binding">43.65</div>
+            <div class="col col-right col-sep min-50 ng-binding">113.10</div>
+          </div><!-- end ngRepeat: row in data | orderBy:predicate:desc --><div class="item row row-item min-705" ng-repeat="row in data | orderBy:predicate:desc">
+            <div class="col col-left col-20 min-180 ng-binding">TEST11</div>
+            <div class="col col-right col-sep min-75 ng-binding">4,559.11</div>
+            <div class="col col-right col-sep min-75 ng-binding">4,741.61</div>
+            <div class="col col-right col-sep min-75 ng-binding">182.50</div>
+            <div class="col col-right col-sep min-50 ng-binding">62</div>
+            <div class="col col-right col-sep min-50 ng-binding">73.53</div>
+            <div class="col col-right col-sep min-50 ng-binding">160</div>
+            <div class="col col-right col-sep min-50 ng-binding">2.58</div>
+            <div class="col col-right col-sep min-50 ng-binding">28.49</div>
+            <div class="col col-right col-sep min-50 ng-binding">103.04</div>
+          </div><!-- end ngRepeat: row in data | orderBy:predicate:desc --><div class="item row row-item min-705" ng-repeat="row in data | orderBy:predicate:desc">
+            <div class="col col-left col-20 min-180 ng-binding">TEST11</div>
+            <div class="col col-right col-sep min-75 ng-binding">12,517.09</div>
+            <div class="col col-right col-sep min-75 ng-binding">12,766.19</div>
+            <div class="col col-right col-sep min-75 ng-binding">249.10</div>
+            <div class="col col-right col-sep min-50 ng-binding">98</div>
+            <div class="col col-right col-sep min-50 ng-binding">127.73</div>
+            <div class="col col-right col-sep min-50 ng-binding">294</div>
+            <div class="col col-right col-sep min-50 ng-binding">3.00</div>
+            <div class="col col-right col-sep min-50 ng-binding">42.58</div>
+            <div class="col col-right col-sep min-50 ng-binding">125.67</div>
+          </div><!-- end ngRepeat: row in data | orderBy:predicate:desc --><div class="item row row-item min-705" ng-repeat="row in data | orderBy:predicate:desc">
+            <div class="col col-left col-20 min-180 ng-binding">TEST2</div>
+            <div class="col col-right col-sep min-75 ng-binding">10,351.62</div>
+            <div class="col col-right col-sep min-75 ng-binding">10,458.54</div>
+            <div class="col col-right col-sep min-75 ng-binding">106.92</div>
+            <div class="col col-right col-sep min-50 ng-binding">109</div>
+            <div class="col col-right col-sep min-50 ng-binding">94.97</div>
+            <div class="col col-right col-sep min-50 ng-binding">286</div>
+            <div class="col col-right col-sep min-50 ng-binding">2.62</div>
+            <div class="col col-right col-sep min-50 ng-binding">36.19</div>
+            <div class="col col-right col-sep min-50 ng-binding">116.65</div>
+          </div><!-- end ngRepeat: row in data | orderBy:predicate:desc --><div class="item row row-item min-705" ng-repeat="row in data | orderBy:predicate:desc">
+            <div class="col col-left col-20 min-180 ng-binding">TEST3</div>
+            <div class="col col-right col-sep min-75 ng-binding">16,517.80</div>
+            <div class="col col-right col-sep min-75 ng-binding">16,935.61</div>
+            <div class="col col-right col-sep min-75 ng-binding">417.81</div>
+            <div class="col col-right col-sep min-50 ng-binding">129</div>
+            <div class="col col-right col-sep min-50 ng-binding">128.05</div>
+            <div class="col col-right col-sep min-50 ng-binding">464</div>
+            <div class="col col-right col-sep min-50 ng-binding">3.60</div>
+            <div class="col col-right col-sep min-50 ng-binding">35.60</div>
+            <div class="col col-right col-sep min-50 ng-binding">104.12</div>
+          </div><!-- end ngRepeat: row in data | orderBy:predicate:desc --><div class="item row row-item min-705" ng-repeat="row in data | orderBy:predicate:desc">
+            <div class="col col-left col-20 min-180 ng-binding">TEST4</div>
+            <div class="col col-right col-sep min-75 ng-binding">7,998.88</div>
+            <div class="col col-right col-sep min-75 ng-binding">9,047.07</div>
+            <div class="col col-right col-sep min-75 ng-binding">1,048.19</div>
+            <div class="col col-right col-sep min-50 ng-binding">58</div>
+            <div class="col col-right col-sep min-50 ng-binding">137.91</div>
+            <div class="col col-right col-sep min-50 ng-binding">171</div>
+            <div class="col col-right col-sep min-50 ng-binding">2.95</div>
+            <div class="col col-right col-sep min-50 ng-binding">46.78</div>
+            <div class="col col-right col-sep min-50 ng-binding">80.63</div>
+          </div><!-- end ngRepeat: row in data | orderBy:predicate:desc --><div class="item row row-item min-705" ng-repeat="row in data | orderBy:predicate:desc">
+            <div class="col col-left col-20 min-180 ng-binding">TEST5</div>
+            <div class="col col-right col-sep min-75 ng-binding">494.91</div>
+            <div class="col col-right col-sep min-75 ng-binding">494.91</div>
+            <div class="col col-right col-sep min-75 ng-binding">0.00</div>
+            <div class="col col-right col-sep min-50 ng-binding">5</div>
+            <div class="col col-right col-sep min-50 ng-binding">98.98</div>
+            <div class="col col-right col-sep min-50 ng-binding">18</div>
+            <div class="col col-right col-sep min-50 ng-binding">3.60</div>
+            <div class="col col-right col-sep min-50 ng-binding">27.50</div>
+            <div class="col col-right col-sep min-50 ng-binding">122.33</div>
+          </div><!-- end ngRepeat: row in data | orderBy:predicate:desc --><div class="item row row-item min-705" ng-repeat="row in data | orderBy:predicate:desc">
+            <div class="col col-left col-20 min-180 ng-binding">TEST6</div>
+            <div class="col col-right col-sep min-75 ng-binding">10,352.53</div>
+            <div class="col col-right col-sep min-75 ng-binding">10,846.78</div>
+            <div class="col col-right col-sep min-75 ng-binding">494.25</div>
+            <div class="col col-right col-sep min-50 ng-binding">135</div>
+            <div class="col col-right col-sep min-50 ng-binding">76.69</div>
+            <div class="col col-right col-sep min-50 ng-binding">399</div>
+            <div class="col col-right col-sep min-50 ng-binding">2.96</div>
+            <div class="col col-right col-sep min-50 ng-binding">25.95</div>
+            <div class="col col-right col-sep min-50 ng-binding">112.45</div>
+          </div><!-- end ngRepeat: row in data | orderBy:predicate:desc --><div class="item row row-item min-705" ng-repeat="row in data | orderBy:predicate:desc">
+            <div class="col col-left col-20 min-180 ng-binding">TEST7</div>
+            <div class="col col-right col-sep min-75 ng-binding">2,480.96</div>
+            <div class="col col-right col-sep min-75 ng-binding">2,867.50</div>
+            <div class="col col-right col-sep min-75 ng-binding">386.54</div>
+            <div class="col col-right col-sep min-50 ng-binding">50</div>
+            <div class="col col-right col-sep min-50 ng-binding">49.62</div>
+            <div class="col col-right col-sep min-50 ng-binding">118</div>
+            <div class="col col-right col-sep min-50 ng-binding">2.36</div>
+            <div class="col col-right col-sep min-50 ng-binding">21.03</div>
+            <div class="col col-right col-sep min-50 ng-binding">89.20</div>
+          </div><!-- end ngRepeat: row in data | orderBy:predicate:desc --><div class="item row row-item min-705" ng-repeat="row in data | orderBy:predicate:desc">
+            <div class="col col-left col-20 min-180 ng-binding">TEST8</div>
+            <div class="col col-right col-sep min-75 ng-binding">1,535.33</div>
+            <div class="col col-right col-sep min-75 ng-binding">1,645.22</div>
+            <div class="col col-right col-sep min-75 ng-binding">109.89</div>
+            <div class="col col-right col-sep min-50 ng-binding">12</div>
+            <div class="col col-right col-sep min-50 ng-binding">127.94</div>
+            <div class="col col-right col-sep min-50 ng-binding">35</div>
+            <div class="col col-right col-sep min-50 ng-binding">2.92</div>
+            <div class="col col-right col-sep min-50 ng-binding">43.87</div>
+            <div class="col col-right col-sep min-50 ng-binding">120.50</div>
+          </div><!-- end ngRepeat: row in data | orderBy:predicate:desc --><div class="item row row-item min-705" ng-repeat="row in data | orderBy:predicate:desc">
+            <div class="col col-left col-20 min-180 ng-binding">TEST9</div>
+            <div class="col col-right col-sep min-75 ng-binding">2,552.77</div>
+            <div class="col col-right col-sep min-75 ng-binding">2,616.48</div>
+            <div class="col col-right col-sep min-75 ng-binding">63.72</div>
+            <div class="col col-right col-sep min-50 ng-binding">21</div>
+            <div class="col col-right col-sep min-50 ng-binding">121.56</div>
+            <div class="col col-right col-sep min-50 ng-binding">58</div>
+            <div class="col col-right col-sep min-50 ng-binding">2.76</div>
+            <div class="col col-right col-sep min-50 ng-binding">44.01</div>
+            <div class="col col-right col-sep min-50 ng-binding">195.62</div>
+          </div><!-- end ngRepeat: row in data | orderBy:predicate:desc -->
+          <div class="item item-footer item-positive row row-item min-705">
+            <div class="col col-left col-20 min-180"></div>
+            <div class="col col-right min-75 ng-binding">91,692.07</div>
+            <div class="col col-right min-75 ng-binding">95,555.28</div>
+            <div class="col col-right min-75 ng-binding">3,863.21</div>
+            <div class="col col-right min-50 ng-binding">887</div>
+            <div class="col col-right min-50 ng-binding">103.37</div>
+            <div class="col col-right min-50 ng-binding">2,578</div>
+            <div class="col col-right min-50 ng-binding">2.91</div>
+            <div class="col col-right min-50 ng-binding">35.57</div>
+            <div class="col col-right min-50 ng-binding">105.36</div>
+          </div>
+        </div><div class="scroll-bar scroll-bar-h"><div class="scroll-bar-indicator scroll-bar-fade-out" style="width: 1113px; transform-origin: right center; transform: translate3d(-10px, 0px, 0px) scaleX(0.991015);"></div></div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out" style="height: 0px; transform-origin: center bottom;"></div></div></ion-scroll>
+      </ion-content>
+    </ion-side-menu-content>
+    
+  </ion-side-menus>
+      <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+  
+    
+        <script id="rendered-js">
+  angular.module('app', ['ionic', 'ngAnimate']).controller('AppCtrl', function ($scope, $ionicScrollDelegate, $ionicSideMenuDelegate) {$scope.data = [
+    { "id": 1, "descricao": "TEST1", "valorLiquido": 22003.06, "valorBruto": 22807.63, "vendas": 209,
+      "quantidade": 567, "custo": 11104.06, "valorDesconto": 804.57, "markup": 98.15, "ticketMedio": 105.28, "quantidadeMedia": 2.71, "precoMedio": 38.81 },
+    { "id": 6, "descricao": "TEST2", "valorLiquido": 10351.62, "valorBruto": 10458.54, "vendas": 109, "quantidade": 286,
+      "custo": 4778.04, "valorDesconto": 106.92, "markup": 116.65, "ticketMedio": 94.97, "quantidadeMedia": 2.62, "precoMedio": 36.19 },
+    { "id": 7, "descricao": "TEST3", "valorLiquido": 16517.80, "valorBruto": 16935.61, "vendas": 129, "quantidade": 464, "custo": 8092.04, "valorDesconto": 417.81, "markup": 104.12, "ticketMedio": 128.05, "quantidadeMedia": 3.6, "precoMedio": 35.6 },
+    { "id": 8, "descricao": "TEST11", "valorLiquido": 4559.11, "valorBruto": 4741.61, "vendas": 62, "quantidade": 160, "custo": 2245.48,
+      "valorDesconto": 182.5, "markup": 103.04, "ticketMedio": 73.53, "quantidadeMedia": 2.58, "precoMedio": 28.49 },
+    { "id": 10, "descricao": "TEST4", "valorLiquido": 7998.88, "valorBruto": 9047.07, "vendas": 58, "quantidade": 171,
+      "custo": 4428.38, "valorDesconto": 1048.19, "markup": 80.63, "ticketMedio": 137.91, "quantidadeMedia": 2.95, "precoMedio": 46.78 },
+    { "id": 14, "descricao": "TEST11", "valorLiquido": 12517.09, "valorBruto": 12766.19, "vendas": 98, "quantidade": 294, "custo": 5546.59,
+      "valorDesconto": 249.1, "markup": 125.67, "ticketMedio": 127.73, "quantidadeMedia": 3.0, "precoMedio": 42.58 },
+    { "id": 321, "descricao": "TEST6", "valorLiquido": 10352.53, "valorBruto": 10846.78, "vendas": 135, "quantidade": 399,
+      "custo": 4873.04, "valorDesconto": 494.25, "markup": 112.45, "ticketMedio": 76.69, "quantidadeMedia": 2.96, "precoMedio": 25.95 },
+    { "id": 123, "descricao": "TEST5", "valorLiquido": 494.91, "valorBruto": 494.91, "vendas": 5, "quantidade": 18, "custo": 222.61,
+      "valorDesconto": 0.0, "markup": 122.33, "ticketMedio": 98.98, "quantidadeMedia": 3.6, "precoMedio": 27.5 },
+    { "id": 333, "descricao": "TEST7", "valorLiquido": 2480.96, "valorBruto": 2867.50,
+      "vendas": 50, "quantidade": 118, "custo": 1311.31, "valorDesconto": 386.54, "markup": 89.2, "ticketMedio": 49.62, "quantidadeMedia": 2.36, "precoMedio": 21.03 },
+    { "id": 112, "descricao": "TEST8", "valorLiquido": 1535.33, "valorBruto": 1645.22, "vendas": 12, "quantidade": 35, "custo": 696.28,
+      "valorDesconto": 109.89, "markup": 120.5, "ticketMedio": 127.94, "quantidadeMedia": 2.92, "precoMedio": 43.87 },
+    { "id": 259770, "descricao": "TEST10", "valorLiquido": 2880.78, "valorBruto": 2944.22, "vendas": 20, "quantidade": 66,
+      "custo": 1351.83, "valorDesconto": 63.44, "markup": 113.1, "ticketMedio": 144.04, "quantidadeMedia": 3.3, "precoMedio": 43.65 },
+    { "id": 1212, "descricao": "TEST9", "valorLiquido": 2552.77, "valorBruto": 2616.48, "vendas": 21, "quantidade": 58,
+      "custo": 863.53, "valorDesconto": 63.72, "markup": 195.62, "ticketMedio": 121.56, "quantidadeMedia": 2.76, "precoMedio": 44.01 }];
+  
+  
+    // calculating the summary
+    $scope.sum = {
+      valorLiquido: 0, valorBruto: 0, vendas: 0, quantidade: 0, custo: 0, valorDesconto: 0 };
+  
+  
+    for (var idx = 0; idx < $scope.data.length - 1; idx++) {if (window.CP.shouldStopExecution(0)) break;
+      for (var key in $scope.sum) {
+        $scope.sum[key] += $scope.data[idx][key];
+      }
+    }window.CP.exitedLoop(0);
+    $scope.sum.markup = ($scope.sum.valorLiquido / $scope.sum.custo - 1) * 100;
+    $scope.sum.ticketMedio = $scope.sum.valorLiquido / $scope.sum.vendas;
+    $scope.sum.quantidadeMedia = $scope.sum.quantidade / $scope.sum.vendas;
+    $scope.sum.precoMedio = $scope.sum.valorLiquido / $scope.sum.quantidade;
+  
+    // table sorting
+    $scope.predicate = 'descricao';
+    $scope.desc = false;
+  
+  
+    $scope.toggleLeft = function () {
+      $ionicSideMenuDelegate.toggleLeft();
+    };
+  
+    $scope.sort = function (key) {
+      if ($scope.predicate == key)
+      $scope.desc = !$scope.desc;else
+  
+      $scope.predicate = key;
+    };
+  
+    var adjusting = false;
+  
+    $scope.scrollMirror = function (from, to) {
+      if (adjusting) {
+        adjusting = false;
+      } else {
+        // Mirroring zoom level
+        var zoomFrom = $ionicScrollDelegate.$getByHandle(from).getScrollView().getValues().zoom;
+        var zoomTo = $ionicScrollDelegate.$getByHandle(to).getScrollView().getValues().zoom;
+  
+        if (zoomFrom != zoomTo) {
+          $ionicScrollDelegate.$getByHandle(to).getScrollView().zoomTo(zoomFrom);
+        }
+  
+        // Mirroring left position
+        $ionicScrollDelegate.$getByHandle(to).scrollTo($ionicScrollDelegate.$getByHandle(from).getScrollPosition().left,
+        $ionicScrollDelegate.$getByHandle(to).getScrollPosition().top);
+  
+        adjusting = true;
+      }
+    };
+  });
+  //# sourceURL=pen.js
+      </script>
+  
+    
+  
+  
+  
+  </body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>

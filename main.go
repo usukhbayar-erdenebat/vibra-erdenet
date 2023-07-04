@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"strconv"
 	"time"
 
 	"github.com/golang/protobuf/jsonpb"
@@ -269,10 +270,31 @@ func (h *handler) unmarshal(b []byte, v proto.Message) error {
 	return proto.Unmarshal(b, v)
 }
 
+func getVibraData(w http.ResponseWriter, r *http.Request) {
+	queryParams := r.URL.Query()
+
+	limit := queryParams.Get("limit")
+	limitInt, _ := strconv.ParseInt(limit, 10, 64)
+	devName := queryParams.Get("dev_name")
+
+	var data []VibraStore
+	if err := DB.Where("device_name = ?", devName).Limit(int(limitInt)).Order("created_at desc").Find(&data).Error; err != nil {
+		panic(err)
+	}
+
+	jsonData, err := json.Marshal(&data)
+	if err != nil {
+		fmt.Println("error in marshal data")
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(jsonData)
+
+}
+
 func main() {
 	ConnectDatabase()
-	// json: false   - to handle Protobuf payloads (binary)
-	// json: true    - to handle JSON payloads (Protobuf JSON mapping)
 	http.Handle("/", &handler{json: true})
+	http.HandleFunc("/get-vibra", getVibraData)
 	log.Fatal(http.ListenAndServe(":8090", nil))
 }
