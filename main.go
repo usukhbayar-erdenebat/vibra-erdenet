@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"sort"
 	"strconv"
 	"time"
 
@@ -38,7 +39,7 @@ func ConnectDatabase() {
 	}
 	fmt.Println("successfully connected")
 
-	database.AutoMigrate(&VibraStore{})
+	// database.AutoMigrate(&VibraStore{})
 	DB = database
 }
 
@@ -271,6 +272,12 @@ func (h *handler) unmarshal(b []byte, v proto.Message) error {
 	return proto.Unmarshal(b, v)
 }
 
+type ByCreatedAt []VibraStore
+
+func (s ByCreatedAt) Len() int           { return len(s) }
+func (s ByCreatedAt) Less(i, j int) bool { return s[i].CreatedAt.Before(s[j].CreatedAt) }
+func (s ByCreatedAt) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
+
 func getVibraData(w http.ResponseWriter, r *http.Request) {
 	queryParams := r.URL.Query()
 
@@ -282,7 +289,7 @@ func getVibraData(w http.ResponseWriter, r *http.Request) {
 	if err := DB.Where("device_name = ?", devName).Limit(int(limitInt)).Order("created_at desc").Find(&data).Error; err != nil {
 		panic(err)
 	}
-
+	sort.Sort(ByCreatedAt(data))
 	jsonData, err := json.Marshal(&data)
 	if err != nil {
 		fmt.Println("error in marshal data")
