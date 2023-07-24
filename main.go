@@ -147,7 +147,7 @@ type VibraStore struct {
 }
 
 func (c *VibraStore) TableName() string {
-	return "vibra_sensor_erdenet"
+	return "vibra_sensor"
 }
 
 func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
