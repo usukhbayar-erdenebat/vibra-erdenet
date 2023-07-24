@@ -68,7 +68,7 @@ type TempHumi struct {
 type Device struct {
 	Events      int64 `json:"Events"`
 	PowerSrc    int64 `json:"PowerSrc"`
-	BatteryVolt int64 `json:"BatteryVold"`
+	BatteryVolt int64 `json:"BatteryVolt"`
 	Time        int64 `json:"Time"`
 }
 
